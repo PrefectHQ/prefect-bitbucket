@@ -48,6 +48,5 @@ watch:
 
 nav:
     - Home: index.md
-    - Tasks: tasks.md
-    - Flows: flows.md
+    - Credentials: credentials.md
 
