@@ -52,7 +52,7 @@ Load a pre-existing BitBucketCredentials block
 
 ```python
 from prefect import flow
-from prefect_bitbucket import BitBucketCredentials
+from prefect_bitbucket.credentials import BitBucketCredentials
 
 @flow
 def use_stored_bitbucket_creds_flow():
@@ -67,6 +67,9 @@ use_stored_bitbucket_creds_flow()
 Create a new BitBucketCredentials block in a flow
 
 ```python
+from prefect import flow
+from prefect_bitbucket.credentials import BitBucketCredentials
+
 @flow
 def create_new_bitbucket_creds_flow():
     bitbucket_credentials_block = BitBucketCredentials(
