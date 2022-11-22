@@ -1,3 +1,4 @@
+"""Module to enable authenticate interactions with BitBucket"""
 import re
 
 from prefect.blocks.core import Block
@@ -34,7 +35,7 @@ class BitBucketCredentials(Block):
     username: str = None
 
     @validator("username")
-    def _validate_username_characters(cls, value: str) -> str:
+    def _validate_username(cls, value: str) -> str:
         """Validators are by default only called on provided arguments."""
         pattern = "^[A-Za-z0-9_-]*$"
         assert bool(
