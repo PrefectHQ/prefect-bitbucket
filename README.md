@@ -48,7 +48,7 @@ prefect block register -m prefect_bitbucket.credentials
 Note, to use the `load` method on Blocks, you must already have a block document [saved through code](https://orion-docs.prefect.io/concepts/blocks/#saving-blocks) or [saved through the UI](https://orion-docs.prefect.io/ui/blocks/).
 
 ### Write and run a flow
-Load a pre-existing BitBucketCredentials block
+#### Load a pre-existing BitBucketCredentials block.
 
 ```python
 from prefect import flow
@@ -56,7 +56,6 @@ from prefect_bitbucket.credentials import BitBucketCredentials
 
 @flow
 def use_stored_bitbucket_creds_flow():
-    """Create a flow"""
     bitbucket_credentials_block = BitBucketCredentials.load("BLOCK_NAME")
 
     return bitbucket_credentials_block
@@ -64,7 +63,7 @@ def use_stored_bitbucket_creds_flow():
 use_stored_bitbucket_creds_flow()
 ```
 
-Create a new BitBucketCredentials block in a flow
+#### Create a new BitBucketCredentials block in a flow.
 
 ```python
 from prefect import flow
