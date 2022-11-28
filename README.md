@@ -56,7 +56,6 @@ from prefect_bitbucket.credentials import BitBucketCredentials
 
 @flow
 def use_stored_bitbucket_creds_flow():
-    """Create a flow"""
     bitbucket_credentials_block = BitBucketCredentials.load("BLOCK_NAME")
 
     return bitbucket_credentials_block
