@@ -38,8 +38,10 @@ class BitBucketCredentials(Block):
     def _validate_username(cls, value: str) -> str:
         """Validators are by default only called on provided arguments."""
         pattern = "^[A-Za-z0-9_-]*$"
-        assert bool(
-            re.match(pattern, value)
-        ), "username must be alpha, num, dash and/or underscore only"
-        assert len(value) <= 30, "username cannot be longer than 30 chars"
+        if not re.match(pattern, value):
+            raise ValueError(
+                "Username must be alpha, num, dash and/or underscore only."
+            )
+        if not len(value) <= 30:
+            raise ValueError("Username cannot be longer than 30 chars.")
         return value
