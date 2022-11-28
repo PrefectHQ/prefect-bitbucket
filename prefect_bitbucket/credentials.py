@@ -24,7 +24,7 @@ class BitBucketCredentials(Block):
 
     _block_type_name = "BitBucket Credentials"
     _logo_url = HttpUrl(
-        url="",  # REPLACE
+        url="https://banner2.cleanpng.com/20180320/gcq/kisspng-symbol-font-bitbucket-5ab0b6a9021793.8467511015215305370086.jpg",  # noqa
         scheme="https",
     )
     token: SecretStr = Field(
