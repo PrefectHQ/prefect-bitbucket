@@ -1,4 +1,42 @@
-"""Allows for interaction with a BitBucket repository."""
+"""
+Allows for interaction with a BitBucket repository.
+
+The `BitBucket` class in this collection is a storage block that lets Prefect agents
+pull Prefect flow code from BitBucket repositories.
+
+The `BitBucket` block is ideally configured via the Prefect UI, but can also be used
+in Python as the following examples demonstrate.
+
+Examples:
+```python
+    from prefect_bitbucket.repository import BitBucketRepository
+
+    # public BitBucket repository
+    public_bitbucket_block = BitBucketRepository(
+        repository="https://bitbucket.com/my-project/my-repository.git"
+    )
+
+    public_bitbucket_block.save(name="my-bitbucket-block")
+
+
+    # specific branch or tag
+    branch_bitbucket_block = BitBucketRepository(
+        reference="branch-or-tag-name",
+        repository="https://bitbucket.com/my-project/my-repository.git"
+    )
+
+    branch_bitbucket_block.save(name="my-bitbucket-block")
+
+
+    # private BitBucket repository
+    private_bitbucket_block = BitBucketRepository(
+        repository="https://bitbucket.com/my-project/my-repository.git",
+        access_token="MY_BITBUCKET_PERSONAL_ACCESS_TOKEN"
+    )
+
+    private_bitbucket_block.save(name="my-private-bitbucket-block")
+```
+"""
 import io
 from distutils.dir_util import copy_tree
 from pathlib import Path
@@ -6,7 +44,7 @@ from tempfile import TemporaryDirectory
 from typing import Optional, Tuple, Union
 from urllib.parse import urlparse, urlunparse
 
-from prefect.exceptions import InvalidRepositoryUrlError
+from prefect.exceptions import InvalidRepositoryURLError
 from prefect.filesystems import ReadableDeploymentStorage
 from prefect.utilities.asyncutils import sync_compatible
 from prefect.utilities.processutils import run_process
@@ -29,30 +67,28 @@ class BitBucketRepository(ReadableDeploymentStorage):
 
     repository: str = Field(
         default=...,
-        description=("The URL of a BitBucket repository to read from in HTTPS format"),
+        description="The URL of a BitBucket repository to read from in HTTPS format",
     )
     reference: Optional[str] = Field(
         default=None,
-        description=("An optional reference to pin to; can be a branch or tag."),
+        description="An optional reference to pin to; can be a branch or tag.",
     )
     credentials: Optional[BitBucketCredentials] = Field(
         default=None,
-        description=(
-            "An optional BitBucket Credentials block for authenticating with "
-            "private BitBucket repos.",
-        ),
+        description="An optional BitBucket Credentials block for authenticating with "
+        "private BitBucket repos.",
     )
 
     @validator("credentials")
     def _ensure_credentials_go_with_https(cls, v: str, values: dict) -> str:
         """Ensure that credentials are not provided with 'SSH' formatted BitBucket URLs.
+
         Note: validates `access_token` specifically so that it only fires when private
         repositories are used.
         """
-
         if v is not None:
             if urlparse(values["repository"]).scheme != "https":
-                raise InvalidRepositoryUrlError(
+                raise InvalidRepositoryURLError(
                     (
                         "Credentials can only be used with BitBucket repositories "
                         "using the 'HTTPS' format. You must either remove the "
@@ -66,6 +102,7 @@ class BitBucketRepository(ReadableDeploymentStorage):
 
     def _create_repo_url(self) -> str:
         """Format the URL provided to the `git clone` command.
+
         For private repos:
         https://x-token-auth:<access-token>@bitbucket.org/<user>/<repo>.git
         All other repos should be the same as `self.repository`.
@@ -86,8 +123,10 @@ class BitBucketRepository(ReadableDeploymentStorage):
     def _get_paths(
         dst_dir: Union[str, None], src_dir: str, sub_directory: Optional[str]
     ) -> Tuple[str, str]:
-        """Returns the fully formed paths for BitBucketRepository contents in the form
-        (content_source, content_destination).
+        """Return the fully formed paths for BitBucketRepository contents.
+
+        Return will take the form of (content_source, content_destination).
+
         """
         if dst_dir is None:
             content_destination = Path(".").absolute()
@@ -106,15 +145,16 @@ class BitBucketRepository(ReadableDeploymentStorage):
     async def get_directory(
         self, from_path: Optional[str] = None, local_path: Optional[str] = None
     ) -> None:
-        """
-        Clones a BitBucket project specified in `from_path` to the provided
-        `local_path`; defaults to cloning the repository reference configured on the
+        """Clones a BitBucket project specified in `from_path` to the provided `local_path`.
+
+        This defaults to cloning the repository reference configured on the
         Block to the present working directory.
 
         Args:
             from_path: If provided, interpreted as a subdirectory of the underlying
                 repository that will be copied to the provided local path.
             local_path: A local path to clone to; defaults to present working directory.
+
         """
         # Construct command
         cmd = ["git", "clone", self._create_repo_url()]
