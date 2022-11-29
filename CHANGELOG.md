@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - `BitBucketCredentials` block - [#3](https://github.com/PrefectHQ/prefect-bitbucket/pull/3/)
-- `BitBucketRepository` block - [#4](https://github.com/PrefectHQ/prefect-bitbucket/pull/4/)
+- `BitBucketRepository` block - [#5](https://github.com/PrefectHQ/prefect-bitbucket/pull/4/)
 
 ### Changed
 
