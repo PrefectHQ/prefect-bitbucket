@@ -116,7 +116,7 @@ class TestBitBucketRepository:
         repo = "https://bitbucket.org/PrefectHQ/prefect.git"
         b = BitBucketRepository(
             repository=repo,
-            credentials=BitBucketCredentials(token=SecretStr(credential)),
+            bitbucket_credentials=BitBucketCredentials(token=SecretStr(credential)),
         )
         await b.get_directory()
         assert mock.await_count == 1
@@ -150,7 +150,7 @@ class TestBitBucketRepository:
         with pytest.raises(InvalidRepositoryURLError, match=error_msg):
             BitBucketRepository(
                 repository="git@bitbucket.org:PrefectHQ/prefect.git",
-                credentials=BitBucketCredentials(token=SecretStr(credential)),
+                bitbucket_credentials=BitBucketCredentials(token=SecretStr(credential)),
             )
 
     async def test_dir_contents_copied_correctly_with_get_directory(

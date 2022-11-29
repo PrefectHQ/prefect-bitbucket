@@ -31,7 +31,9 @@ Examples:
     # private BitBucket repository
     private_bitbucket_block = BitBucketRepository(
         repository="https://bitbucket.com/my-project/my-repository.git",
-        access_token="MY_BITBUCKET_PERSONAL_ACCESS_TOKEN"
+        bitbucket_credentials=BitBucketCredentials.load("my-bitbucket-credentials-block")
+
+
     )
 
     private_bitbucket_block.save(name="my-private-bitbucket-block")
@@ -75,7 +77,7 @@ class BitBucketRepository(ReadableDeploymentStorage):
         default=None,
         description="An optional reference to pin to; can be a branch or tag.",
     )
-    credentials: Optional[BitBucketCredentials] = Field(
+    bitbucket_credentials: Optional[BitBucketCredentials] = Field(
         default=None,
         description=(
             "An optional BitBucketCredentials block for authenticating with "

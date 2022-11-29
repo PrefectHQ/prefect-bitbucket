@@ -127,7 +127,7 @@ bitbucket_credentials_block.save(name="my-bitbucket-credentials-block")
 private_repo = "https://bitbucket.org/my-workspace/my-repository.git"
 private_bitbucket_block = BitBucketRepository(
     repository=private_repo,
-    credentials=bitbucket_credentials_block
+    bitbucket_credentials=bitbucket_credentials_block
 )
 
 # Saves the BitBucketRepository block to your Prefect workspace (in the Blocks tab)
@@ -139,14 +139,13 @@ private_bitbucket_block.save(name="my-private-bitbucket-block")
 from prefect_bitbucket import BitBucketCredentials, BitBucketRepository
 
 # Loads a preexisting BitBucketCredentials block
-bitbucket_credentials_block.load(name="my-bitbucket-credentials-block")
-
+BitBucketCredentials.load("my-bitbucket-credentials-block")
 
 # Creates a private BitBucket repository BitBucketRepository block
 private_repo = "https://bitbucket.org/my-workspace/my-repository.git"
 private_bitbucket_block = BitBucketRepository(
     repository=private_repo,
-    credentials=bitbucket_credentials_block
+    bitbucket_credentials=bitbucket_credentials_block
 )
 
 # Saves the BitBucketRepository block to your Prefect workspace (in the Blocks tab)
