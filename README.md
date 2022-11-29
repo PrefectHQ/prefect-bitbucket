@@ -53,11 +53,19 @@ Note, to use the `load` method on Blocks, you must already have a block document
 ```python
 from prefect import flow
 from prefect_bitbucket.credentials import BitBucketCredentials
+<<<<<<< HEAD
 
 @flow
 def use_stored_bitbucket_creds_flow():
     bitbucket_credentials_block = BitBucketCredentials.load("BLOCK_NAME")
 
+=======
+
+@flow
+def use_stored_bitbucket_creds_flow():
+    bitbucket_credentials_block = BitBucketCredentials.load("BLOCK_NAME")
+
+>>>>>>> da27fe0038a0d0b55d196ee6686d7b31a5bb6e53
     return bitbucket_credentials_block
 
 use_stored_bitbucket_creds_flow()
