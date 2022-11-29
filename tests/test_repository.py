@@ -13,7 +13,7 @@ from prefect_bitbucket.credentials import BitBucketCredentials
 from prefect_bitbucket.repository import BitBucketRepository
 
 
-class TestBitBucket:
+class TestBitBucketRepository:
     def setup_test_directory(
         self, tmp_src: str, sub_dir: str = "puppy"
     ) -> Tuple[Set[str], Set[str]]:
