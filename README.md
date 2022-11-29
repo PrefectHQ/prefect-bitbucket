@@ -79,7 +79,7 @@ def create_new_bitbucket_creds_flow():
 create_new_bitbucket_creds_flow()
 ```
 
-#### Create a BitBucketRepository block for a public repo
+#### Create a BitBucketRepository block for a public repo.
 ```python
 from prefect_bitbucket import BitBucketRepository
 
@@ -94,7 +94,7 @@ public_bitbucket_block = BitBucketRepository(
 public_bitbucket_block.save("my-bitbucket-block")
 ```
 
-#### Create a BitBucketRepository block for a public repo at a specific branch or tag
+#### Create a BitBucketRepository block for a public repo at a specific branch or tag.
 ```python
 from prefect_bitbucket import BitBucketRepository
 
@@ -109,7 +109,7 @@ branch_bitbucket_block = BitBucketRepository(
 # Saves the BitBucketRepository block to your Prefect workspace (in the Blocks tab)
 branch_bitbucket_block.save("my-bitbucket-branch-block")
 ```
-#### Create a new BitBucketCredentials block and a BitBucketRepository block for a private repo
+#### Create a new BitBucketCredentials block and a BitBucketRepository block for a private repo.
 ```python
 from prefect_bitbucket import BitBucketCredentials, BitBucketRepository
 
@@ -134,7 +134,7 @@ private_bitbucket_block = BitBucketRepository(
 private_bitbucket_block.save(name="my-private-bitbucket-block")
 ```
 
-#### Use a preexisting BitBucketCredentials block to create a BitBucketRepository block for a private repo
+#### Use a preexisting BitBucketCredentials block to create a BitBucketRepository block for a private repo.
 ```python
 from prefect_bitbucket import BitBucketCredentials, BitBucketRepository
 
