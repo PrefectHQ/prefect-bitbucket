@@ -1,6 +1,4 @@
-"""
-Contains the credentials and repository submodules.
-"""
+"""Contains the credentials and repository submodules."""
 
 from . import _version
 from .credentials import BitBucketCredentials  # noqa

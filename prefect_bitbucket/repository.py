@@ -1,5 +1,4 @@
-"""
-Allows for interaction with a BitBucket repository.
+"""Allows for interaction with a BitBucket repository.
 
 The `BitBucket` class in this collection is a storage block that lets Prefect agents
 pull Prefect flow code from BitBucket repositories.
@@ -58,8 +57,7 @@ from prefect_bitbucket.credentials import BitBucketCredentials
 
 
 class BitBucketRepository(ReadableDeploymentStorage):
-    """
-    Interact with files stored in BitBucket repositories.
+    """Interact with files stored in BitBucket repositories.
 
     An accessible installation of git is required for this block to function
     properly.

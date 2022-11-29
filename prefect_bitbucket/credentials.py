@@ -7,8 +7,7 @@ from pydantic import Field, SecretStr, validator
 
 
 class BitBucketCredentials(Block):
-    """
-    Store BitBucket credentials to interact with private BitBucket repositories.
+    """Store BitBucket credentials to interact with private BitBucket repositories.
 
     Attributes:
         token: An access token to authenticate with BitBucket.
