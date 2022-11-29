@@ -23,10 +23,7 @@ class BitBucketCredentials(Block):
     """
 
     _block_type_name = "BitBucket Credentials"
-    _logo_url = HttpUrl(
-        url="https://banner2.cleanpng.com/20180320/gcq/kisspng-symbol-font-bitbucket-5ab0b6a9021793.8467511015215305370086.jpg",  # noqa
-        scheme="https",
-    )
+    _logo_url = "https://images.ctfassets.net/gm98wzqotmnx/27LMR24ewTSDW238Lks1vH/34c5028659f4007528feadc8db8cecbd/500px-Bitbucket-blue-logomark-only.svg.png?h=250"  # noqa
     token: SecretStr = Field(
         name="Personal Access Token",
         default=None,
