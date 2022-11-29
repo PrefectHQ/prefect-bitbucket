@@ -22,6 +22,7 @@ class TestBitBucket:
         Returns a tuple with the expected parent-level contents and the
         expected child-level contents.
         """
+
         # add file to tmp_src
         f1_name = "dog.text"
         f1_path = Path(tmp_src) / f1_name
@@ -64,6 +65,7 @@ class TestBitBucket:
     # Does it raise an OSError or a RuntimeError
     async def test_subprocess_errors_are_surfaced(self):
         """Ensure that errors from BitBucket are being surfaced to users."""
+
         b = BitBucketRepository(repository="incorrect-url-scheme")
         with pytest.raises(
             OSError, match="fatal: repository 'incorrect-url-scheme' does not exist"
