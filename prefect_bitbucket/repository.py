@@ -78,7 +78,7 @@ class BitBucketRepository(ReadableDeploymentStorage):
     credentials: Optional[BitBucketCredentials] = Field(
         default=None,
         description=(
-            "An optional BitBucket Credentials block for authenticating with "
+            "An optional BitBucketCredentials block for authenticating with "
             "private BitBucket repos."
         ),
     )
