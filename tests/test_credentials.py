@@ -17,4 +17,6 @@ def test_bitbucket_username_invalid_char():
 
 def test_bitbucket_username_over_max_length():
     with pytest.raises(ValueError):
-        BitBucketCredentials(token="token", username="tokenthatisoverthirtycharacters")
+        BitBucketCredentials(
+            token="token", username="usernamethatisoverthirtycharacters"
+        )
