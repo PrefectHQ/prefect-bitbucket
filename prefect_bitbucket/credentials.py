@@ -1,8 +1,9 @@
 """Module to enable authenticate interactions with BitBucket"""
 import re
+from typing import Optional
 
 from prefect.blocks.core import Block
-from pydantic import Field, Optional, SecretStr, validator
+from pydantic import Field, SecretStr, validator
 
 
 class BitBucketCredentials(Block):
