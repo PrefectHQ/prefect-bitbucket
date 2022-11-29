@@ -87,7 +87,9 @@ class BitBucketRepository(ReadableDeploymentStorage):
     def _ensure_credentials_go_with_https(cls, v: str, values: dict) -> str:
         """Ensure that credentials are not provided with 'SSH' formatted BitBucket URLs.
 
-        Note: validates `access_token` specifically so that it only fires when private
+        Validators are by default only called on provided arguments.
+
+        Note: validates `credentials` specifically so that it only fires when private
         repositories are used.
         """
         if v is not None:
