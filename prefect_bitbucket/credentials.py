@@ -29,7 +29,7 @@ class BitBucketCredentials(Block):
         default=...,
         description="A BitBucket Personal Access Token.",
     )
-    username: str = None
+    username: Optional[str] = Field(default=None, description="Identification name unique across entire BitBucket site.")
 
     @validator("username")
     def _validate_username(cls, value: str) -> str:
