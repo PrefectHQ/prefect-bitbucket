@@ -10,7 +10,7 @@ from prefect.exceptions import InvalidRepositoryUrlError
 from prefect.filesystems import ReadableDeploymentStorage
 from prefect.utilities.asyncutils import sync_compatible
 from prefect.utilities.processutils import run_process
-from pydantic import Field, HttpUrl, validator
+from pydantic import Field, validator
 
 from prefect_bitbucket.credentials import BitBucketCredentials
 
@@ -22,31 +22,25 @@ class BitBucketRepository(ReadableDeploymentStorage):
     An accessible installation of git is required for this block to function
     properly.
     """
-    
+
     _block_type_name = "BitBucket Repository"
-    _logo_url = HttpUrl(
-        url="",
-        scheme="https",
-    )
+    _logo_url = "https://images.ctfassets.net/gm98wzqotmnx/27LMR24ewTSDW238Lks1vH/34c5028659f4007528feadc8db8cecbd/500px-Bitbucket-blue-logomark-only.svg.png?h=250"  # noqa
     _description = "Interact with files stored in BitBucket repositories."
 
     repository: str = Field(
         default=...,
-        description=(
-            'The URL of a BitBucket repository to read from in HTTPS format'
-        ),
+        description=("The URL of a BitBucket repository to read from in HTTPS format"),
     )
     reference: Optional[str] = Field(
         default=None,
-        description=("An optional reference to pin to; can be a branch or tag."
-        ),
+        description=("An optional reference to pin to; can be a branch or tag."),
     )
     credentials: Optional[BitBucketCredentials] = Field(
         default=None,
         description=(
             "An optional BitBucket Credentials block for authenticating with "
-        "private BitBucket repos.",
-        )
+            "private BitBucket repos.",
+        ),
     )
 
     @validator("credentials")
@@ -72,7 +66,8 @@ class BitBucketRepository(ReadableDeploymentStorage):
 
     def _create_repo_url(self) -> str:
         """Format the URL provided to the `git clone` command.
-        For private repos: https://x-token-auth:<access-token>@bitbucket.org/<user>/<repo>.git
+        For private repos:
+        https://x-token-auth:<access-token>@bitbucket.org/<user>/<repo>.git
         All other repos should be the same as `self.repository`.
         """
         url_components = urlparse(self.repository)
@@ -84,7 +79,7 @@ class BitBucketRepository(ReadableDeploymentStorage):
             full_url = urlunparse(updated_components)
         else:
             full_url = self.repository
-        
+
         return full_url
 
     @staticmethod
@@ -98,7 +93,7 @@ class BitBucketRepository(ReadableDeploymentStorage):
             content_destination = Path(".").absolute()
         else:
             content_destination = Path(dst_dir)
-        
+
         content_source = Path(src_dir)
 
         if sub_directory:
@@ -112,10 +107,10 @@ class BitBucketRepository(ReadableDeploymentStorage):
         self, from_path: Optional[str] = None, local_path: Optional[str] = None
     ) -> None:
         """
-        Clones a BitBucket project specified in `from_path` to the provided `local_path`;
-        defaults to cloning the repository reference configured on the Block to the
-        present working directory.
-        
+        Clones a BitBucket project specified in `from_path` to the provided
+        `local_path`; defaults to cloning the repository reference configured on the
+        Block to the present working directory.
+
         Args:
             from_path: If provided, interpreted as a subdirectory of the underlying
                 repository that will be copied to the provided local path.
@@ -125,7 +120,7 @@ class BitBucketRepository(ReadableDeploymentStorage):
         cmd = ["git", "clone", self._create_repo_url()]
         if self.reference:
             cmd += ["-b", self.reference]
-        
+
         # Limit git history
         cmd += ["--depth", "1"]
 
