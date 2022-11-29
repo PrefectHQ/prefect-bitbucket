@@ -38,6 +38,7 @@ class BitBucketCredentials(Block):
     def _validate_username(cls, value: str) -> str:
         """Validators are by default only called on provided arguments."""
         pattern = "^[A-Za-z0-9_-]*$"
+
         if not re.match(pattern, value):
             raise ValueError(
                 "Username must be alpha, num, dash and/or underscore only."
