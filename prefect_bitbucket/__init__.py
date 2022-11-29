@@ -1,4 +1,5 @@
 from . import _version
-from .blocks import BitbucketBlock  # noqa
+from .credentials import BitBucketCredentials  # noqa
 
 __version__ = _version.get_versions()["version"]
+__all__ = ["BitBucketCredentials"]
