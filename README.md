@@ -141,9 +141,9 @@ from prefect_bitbucket import BitBucketCredentials, BitBucketRepository
 # Loads a preexisting BitBucketCredentials block
 bitbucket_credentials_block.load(name="my-bitbucket-credentials-block")
 
-private_repo = "https://bitbucket.org/my-workspace/my-repository.git"
 
 # Creates a private BitBucket repository BitBucketRepository block
+private_repo = "https://bitbucket.org/my-workspace/my-repository.git"
 private_bitbucket_block = BitBucketRepository(
     repository=private_repo,
     credentials=bitbucket_credentials_block
