@@ -84,7 +84,7 @@ class BitBucketRepository(ReadableDeploymentStorage):
         ),
     )
 
-    @validator("credentials")
+    @validator("bitbucket_credentials")
     def _ensure_credentials_go_with_https(cls, v: str, values: dict) -> str:
         """Ensure that credentials are not provided with 'SSH' formatted BitBucket URLs.
 
@@ -115,8 +115,8 @@ class BitBucketRepository(ReadableDeploymentStorage):
         All other repos should be the same as `self.repository`.
         """
         url_components = urlparse(self.repository)
-        if url_components.scheme == "https" and self.credentials is not None:
-            token = self.credentials.token.get_secret_value()
+        if url_components.scheme == "https" and self.bitbucket_credentials is not None:
+            token = self.bitbucket_credentials.token.get_secret_value()
             updated_components = url_components._replace(
                 netloc=f"x-token-auth:{token}@{url_components.netloc}"
             )
