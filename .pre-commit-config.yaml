@@ -27,3 +27,8 @@ repos:
         args: [
           '--in-place',
         ]
+  - repo: https://github.com/pycqa/pydocstyle
+    rev: 6.1.1  # pick a git hash / tag to point to
+    hooks:
+      - id: pydocstyle
+        exclude: 'tests/|setup.py|_version.py|versioneer.py'
