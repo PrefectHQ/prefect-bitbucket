@@ -7,37 +7,31 @@ The `BitBucket` block is ideally configured via the Prefect UI, but can also be 
 in Python as the following examples demonstrate.
 
 Examples
---------
 ```python
-    from prefect_bitbucket.repository import BitBucketRepository
+from prefect_bitbucket.repository import BitBucketRepository
 
-    # public BitBucket repository
-    public_bitbucket_block = BitBucketRepository(
-        repository="https://bitbucket.com/my-project/my-repository.git"
-    )
+# public BitBucket repository
+public_bitbucket_block = BitBucketRepository(
+    repository="https://bitbucket.com/my-project/my-repository.git"
+)
 
-    public_bitbucket_block.save(name="my-bitbucket-block")
+public_bitbucket_block.save(name="my-bitbucket-block")
 
+# specific branch or tag
+branch_bitbucket_block = BitBucketRepository(
+    reference="branch-or-tag-name",
+    repository="https://bitbucket.com/my-project/my-repository.git"
+)
 
-    # specific branch or tag
-    branch_bitbucket_block = BitBucketRepository(
-        reference="branch-or-tag-name",
-        repository="https://bitbucket.com/my-project/my-repository.git"
-    )
+branch_bitbucket_block.save(name="my-bitbucket-block")
 
-    branch_bitbucket_block.save(name="my-bitbucket-block")
+# private BitBucket repository
+private_bitbucket_block = BitBucketRepository(
+    repository="https://bitbucket.com/my-project/my-repository.git",
+    bitbucket_credentials=BitBucketCredentials.load("my-bitbucket-credentials-block")
+)
 
-
-    # private BitBucket repository
-    private_bitbucket_block = BitBucketRepository(
-        repository="https://bitbucket.com/my-project/my-repository.git",
-        bitbucket_credentials=BitBucketCredentials.load("my-bitbucket-credentials-block")
-
-
-    )
-
-    private_bitbucket_block.save(name="my-private-bitbucket-block")
-```
+private_bitbucket_block.save(name="my-private-bitbucket-block")
 
 """
 
