@@ -152,7 +152,6 @@ class BitBucketRepository(ReadableDeploymentStorage):
         Block to the present working directory.
 
         Args:
-        ----
             from_path: If provided, interpreted as a subdirectory of the underlying
                 repository that will be copied to the provided local path.
             local_path: A local path to clone to; defaults to present working directory.
