@@ -13,7 +13,10 @@ def test_bitbucket_credentials(token):
 
 def ensure_valid_bitbucket_username_passes():
     """Ensure invalid char username raises."""
-    return BitBucketCredentials(token="token", username="validusername")
+    try:
+        BitBucketCredentials(token="token", username="validusername")
+    except Exception as exc:
+        assert False, f"Valid username raised an exception {exc}"
 
 
 def test_bitbucket_username_invalid_char():
