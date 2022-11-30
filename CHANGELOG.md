@@ -8,8 +8,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Added
-- `BitBucketCredentials` block - [#3](https://github.com/PrefectHQ/prefect-bitbucket/pull/3/)
-- `BitBucketRepository` block - [#5](https://github.com/PrefectHQ/prefect-bitbucket/pull/5/)
 
 ### Changed
 
@@ -23,8 +21,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## 0.1.0
 
-Released on ????? ?th, 20??.
+Released on November 30th, 2022.
 
 ### Added
-
-- `task_name` task - [#1](https://github.com/PrefectHQ/prefect-bitbucket/pull/1)
+- `BitBucketCredentials` block - [#3](https://github.com/PrefectHQ/prefect-bitbucket/pull/3/)
+- `BitBucketRepository` block - [#5](https://github.com/PrefectHQ/prefect-bitbucket/pull/5/)
