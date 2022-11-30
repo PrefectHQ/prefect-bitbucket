@@ -11,6 +11,11 @@ def test_bitbucket_credentials(token):
     assert isinstance(credentials_block, Block)
 
 
+def ensure_valid_bitbucket_username_passes():
+    """Ensure invalid char username raises."""
+    return BitBucketCredentials(token="token", username="validusername")
+
+
 def test_bitbucket_username_invalid_char():
     """Ensure invalid char username raises."""
     with pytest.raises(ValueError):
