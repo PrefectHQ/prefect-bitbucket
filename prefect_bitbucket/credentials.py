@@ -9,14 +9,12 @@ from pydantic import Field, SecretStr, validator
 class BitBucketCredentials(Block):
     """Store BitBucket credentials to interact with private BitBucket repositories.
 
-    Attributes
-    ----------
+    Attributes:
         token: An access token to authenticate with BitBucket.
         username: Identification name unique across entire BitBucket site.
 
 
-    Examples
-    --------
+    Examples:
         Load stored BitBucket credentials:
         ```python
         from prefect_bitbucket import BitBucketCredentials
