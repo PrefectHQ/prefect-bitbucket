@@ -6,7 +6,8 @@ pull Prefect flow code from BitBucket repositories.
 The `BitBucket` block is ideally configured via the Prefect UI, but can also be used
 in Python as the following examples demonstrate.
 
-Examples:
+Examples
+--------
 ```python
     from prefect_bitbucket.repository import BitBucketRepository
 
@@ -157,6 +158,7 @@ class BitBucketRepository(ReadableDeploymentStorage):
         Block to the present working directory.
 
         Args:
+        ----
             from_path: If provided, interpreted as a subdirectory of the underlying
                 repository that will be copied to the provided local path.
             local_path: A local path to clone to; defaults to present working directory.

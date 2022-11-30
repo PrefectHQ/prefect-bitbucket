@@ -1,4 +1,4 @@
-"Copies README.md to index.md."
+"""Copies README.md to index.md."""
 
 from pathlib import Path
 

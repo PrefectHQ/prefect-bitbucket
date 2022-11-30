@@ -9,16 +9,20 @@ from pydantic import Field, SecretStr, validator
 class BitBucketCredentials(Block):
     """Store BitBucket credentials to interact with private BitBucket repositories.
 
-    Attributes:
+    Attributes
+    ----------
         token: An access token to authenticate with BitBucket.
         username: Identification name unique across entire BitBucket site.
 
-    Examples:
+
+    Examples
+    --------
         Load stored BitBucket credentials:
         ```python
         from prefect_bitbucket import BitBucketCredentials
         bitbucket_credentials_block = BitBucketCredentials.load("BLOCK_NAME")
         ```
+
 
     """
 
@@ -36,7 +40,7 @@ class BitBucketCredentials(Block):
 
     @validator("username")
     def _validate_username(cls, value: str) -> str:
-        """Validators are by default only called on provided arguments."""
+        """When username provided, will validate it."""
         pattern = "^[A-Za-z0-9_-]*$"
 
         if not re.match(pattern, value):

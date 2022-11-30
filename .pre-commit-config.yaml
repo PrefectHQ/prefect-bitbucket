@@ -31,4 +31,4 @@ repos:
     rev: 6.1.1  # pick a git hash / tag to point to
     hooks:
       - id: pydocstyle
-        exclude: 'tests/|setup.py'
+        exclude: 'tests/|setup.py|_version.py|versioneer.py'
