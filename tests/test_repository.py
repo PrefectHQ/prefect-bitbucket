@@ -87,6 +87,21 @@ class TestBitBucketRepository:
         expected_cmd = ["git", "clone", "prefect"]
         assert mock.await_args[0][0][: len(expected_cmd)] == expected_cmd
 
+    async def test_repository_default_with_credentials_none(self, monkeypatch):
+        """Ensure that default command is `git clone <repo-name>` when given just a repo.  # noqa"""
+
+        class p:
+            returncode = 0
+
+        mock = AsyncMock(return_value=p())
+        monkeypatch.setattr(prefect_bitbucket.repository, "run_process", mock)
+        b = BitBucketRepository(repository="prefect", bitbucket_credentials=None)
+        await b.get_directory()
+
+        assert mock.await_count == 1
+        expected_cmd = ["git", "clone", "prefect"]
+        assert mock.await_args[0][0][: len(expected_cmd)] == expected_cmd
+
     async def test_reference_default(self, monkeypatch):
         """Ensure that default command is `git clone <repo-name> -b <reference> --depth 1`  # noqa
         when just a repo and reference are given.
