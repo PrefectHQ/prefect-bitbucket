@@ -21,7 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## 0.1.0
 
-Released on November 30th, 2022.
+Released on December 6th, 2022.
 
 ### Added
 - `BitBucketCredentials` block - [#3](https://github.com/PrefectHQ/prefect-bitbucket/pull/3/)
