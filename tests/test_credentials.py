@@ -1,6 +1,7 @@
 import pytest
-from prefect.blocks.core import Block
 from atlassian.bitbucket import Bitbucket, Cloud
+from prefect.blocks.core import Block
+
 from prefect_bitbucket.credentials import BitBucketCredentials, ClientType
 
 
@@ -33,9 +34,14 @@ def test_bitbucket_username_over_max_length():
         )
 
 
-@pytest.mark.parametrize("client_type", ["local", "LOCAL", "cloud", "Cloud", ClientType.LOCAL, ClientType.CLOUD])
+@pytest.mark.parametrize(
+    "client_type",
+    ["local", "LOCAL", "cloud", "Cloud", ClientType.LOCAL, ClientType.CLOUD],
+)
 def test_bitbucket_get_client(client_type):
-    bitbucket_credentials = BitBucketCredentials(url="my-url", username="my-username", password="my-password")
+    bitbucket_credentials = BitBucketCredentials(
+        url="my-url", username="my-username", password="my-password"
+    )
     client = bitbucket_credentials.get_client(client_type=client_type)
     if not isinstance(client_type, str):
         client_type = client_type.value

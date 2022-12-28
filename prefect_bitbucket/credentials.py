@@ -1,19 +1,23 @@
 """Module to enable authenticate interactions with BitBucket."""
 import re
-from typing import Optional, Union
 from enum import Enum
+from typing import Optional, Union
 
 from prefect.blocks.abstract import CredentialsBlock
-from prefect.blocks.core import Block
 from pydantic import Field, SecretStr, validator
+
 try:
     from atlassian.bitbucket import Bitbucket, Cloud
 except ImportError:
     pass
 
+
 class ClientType(Enum):
+    """The client type to use."""
+
     LOCAL = "local"
     CLOUD = "cloud"
+
 
 class BitBucketCredentials(CredentialsBlock):
     """Store BitBucket credentials to interact with private BitBucket repositories.
@@ -45,8 +49,7 @@ class BitBucketCredentials(CredentialsBlock):
         description="Identification name unique across entire BitBucket site.",
     )
     password: Optional[str] = Field(
-        default=None,
-        description="The password to authenticate to BitBucket."
+        default=None, description="The password to authenticate to BitBucket."
     )
     url: Optional[str] = Field(
         default=None,
@@ -67,20 +70,24 @@ class BitBucketCredentials(CredentialsBlock):
             raise ValueError("Username cannot be longer than 30 chars.")
         return value
 
-    def get_client(self, client_type: Union[str, ClientType]) -> Union[Cloud, Bitbucket]:
-        """
-        Get an authenticated local or cloud Bitbucket client.
+    def get_client(
+        self, client_type: Union[str, ClientType]
+    ) -> Union[Cloud, Bitbucket]:
+        """Get an authenticated local or cloud Bitbucket client.
 
         Args:
             client_type: Whether to use a local or cloud client.
 
         Returns:
             An authenticated Bitbucket client.
+
         """
         # ref: https://atlassian-python-api.readthedocs.io/
         if isinstance(client_type, str):
             client_type = ClientType(client_type.lower())
-        client_kwargs = dict(url=self.url, username=self.username, password=self.password)
+        client_kwargs = dict(
+            url=self.url, username=self.username, password=self.password
+        )
         if client_type == ClientType.CLOUD:
             client = Cloud(cloud=True, **client_kwargs)
         else:
