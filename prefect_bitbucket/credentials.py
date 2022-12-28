@@ -25,6 +25,8 @@ class BitBucketCredentials(CredentialsBlock):
     Attributes:
         token: An access token to authenticate with BitBucket.
         username: Identification name unique across entire BitBucket site.
+        password: The password to authenticate to BitBucket.
+        url: The base url used for the cloud / local client.
 
 
     Examples:
@@ -53,7 +55,7 @@ class BitBucketCredentials(CredentialsBlock):
     )
     url: Optional[str] = Field(
         default=None,
-        description="The base url used for the cloud / local client",
+        description="The base url used for the cloud / local client.",
         title="URL",
     )
 
