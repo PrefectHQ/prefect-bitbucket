@@ -1,12 +1,21 @@
 """Module to enable authenticate interactions with BitBucket."""
 import re
-from typing import Optional
+from typing import Optional, Union
+from enum import Enum
 
+from prefect.blocks.abstract import CredentialsBlock
 from prefect.blocks.core import Block
 from pydantic import Field, SecretStr, validator
+try:
+    from atlassian.bitbucket import Bitbucket, Cloud
+except ImportError:
+    pass
 
+class ClientType(Enum):
+    LOCAL = "local"
+    CLOUD = "cloud"
 
-class BitBucketCredentials(Block):
+class BitBucketCredentials(CredentialsBlock):
     """Store BitBucket credentials to interact with private BitBucket repositories.
 
     Attributes:
@@ -35,6 +44,15 @@ class BitBucketCredentials(Block):
         default=None,
         description="Identification name unique across entire BitBucket site.",
     )
+    password: Optional[str] = Field(
+        default=None,
+        description="The password to authenticate to BitBucket."
+    )
+    url: Optional[str] = Field(
+        default=None,
+        description="The base url used for the cloud / local client",
+        title="URL",
+    )
 
     @validator("username")
     def _validate_username(cls, value: str) -> str:
@@ -48,3 +66,23 @@ class BitBucketCredentials(Block):
         if not len(value) <= 30:
             raise ValueError("Username cannot be longer than 30 chars.")
         return value
+
+    def get_client(self, client_type: Union[str, ClientType]) -> Union[Cloud, Bitbucket]:
+        """
+        Get an authenticated local or cloud Bitbucket client.
+
+        Args:
+            client_type: Whether to use a local or cloud client.
+
+        Returns:
+            An authenticated Bitbucket client.
+        """
+        # ref: https://atlassian-python-api.readthedocs.io/
+        if isinstance(client_type, str):
+            client_type = ClientType(client_type.lower())
+        client_kwargs = dict(url=self.url, username=self.username, password=self.password)
+        if client_type == ClientType.CLOUD:
+            client = Cloud(cloud=True, **client_kwargs)
+        else:
+            client = Bitbucket(**client_kwargs)
+        return client
