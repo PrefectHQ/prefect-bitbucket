@@ -41,7 +41,7 @@ class BitBucketCredentials(CredentialsBlock):
 
     _block_type_name = "BitBucket Credentials"
     _logo_url = "https://images.ctfassets.net/gm98wzqotmnx/27LMR24ewTSDW238Lks1vH/34c5028659f4007528feadc8db8cecbd/500px-Bitbucket-blue-logomark-only.svg.png?h=250"  # noqa
-    token: SecretStr = Field(
+    token: Optional[SecretStr] = Field(
         name="Personal Access Token",
         default=None,
         description="A BitBucket Personal Access Token.",
@@ -50,12 +50,12 @@ class BitBucketCredentials(CredentialsBlock):
         default=None,
         description="Identification name unique across entire BitBucket site.",
     )
-    password: Optional[str] = Field(
+    password: Optional[SecretStr] = Field(
         default=None, description="The password to authenticate to BitBucket."
     )
     url: Optional[str] = Field(
-        default=None,
-        description="The base url used for the cloud / local client.",
+        default="https://api.bitbucket.org/",
+        description="The base URL of your BitBucket instance.",
         title="URL",
     )
 
@@ -73,7 +73,7 @@ class BitBucketCredentials(CredentialsBlock):
         return value
 
     def get_client(
-        self, client_type: Union[str, ClientType]
+        self, client_type: Union[str, ClientType], **client_kwargs
     ) -> Union[Cloud, Bitbucket]:
         """Get an authenticated local or cloud Bitbucket client.
 
@@ -87,11 +87,15 @@ class BitBucketCredentials(CredentialsBlock):
         # ref: https://atlassian-python-api.readthedocs.io/
         if isinstance(client_type, str):
             client_type = ClientType(client_type.lower())
-        client_kwargs = dict(
-            url=self.url, username=self.username, password=self.password
+
+        password = self.password.get_secret_value()
+        input_client_kwargs = dict(
+            url=self.url, username=self.username, password=password
         )
+        input_client_kwargs.update(**client_kwargs)
+
         if client_type == ClientType.CLOUD:
-            client = Cloud(cloud=True, **client_kwargs)
+            client = Cloud(**input_client_kwargs)
         else:
-            client = Bitbucket(**client_kwargs)
+            client = Bitbucket(**input_client_kwargs)
         return client
