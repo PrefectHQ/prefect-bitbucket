@@ -26,7 +26,7 @@ class BitBucketCredentials(CredentialsBlock):
         token: An access token to authenticate with BitBucket.
         username: Identification name unique across entire BitBucket site.
         password: The password to authenticate to BitBucket.
-        url: The base url used for the cloud / local client.
+        url: The base URL of your BitBucket instance.
 
 
     Examples:
