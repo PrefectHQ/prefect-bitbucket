@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Added
-- `get_client` method and `url` field in `BitbucketCredentials` - [#10](https://github.com/PrefectHQ/prefect-bitbucket/pull/10/)
+- `get_client` method and `url` field in `BitbucketCredentials` - [#7](https://github.com/PrefectHQ/prefect-bitbucket/pull/7/)
 
 ### Changed
 
