@@ -21,7 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## 0.1.1
 
-Released on February 17th, 2023.
+Released on February 16th, 2023.
 
 ### Added
 - `get_client` method and `url` field in `BitbucketCredentials` - [#7](https://github.com/PrefectHQ/prefect-bitbucket/pull/7/)
