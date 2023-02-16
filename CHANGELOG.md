@@ -8,8 +8,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Added
-- `get_client` method and `url` field in `BitbucketCredentials` - [#7](https://github.com/PrefectHQ/prefect-bitbucket/pull/7/)
-- support to log into Bitbucket Server with `token` and `username` - [#11](https://github.com/PrefectHQ/prefect-bitbucket/pull/11/)
 
 ### Changed
 
@@ -20,6 +18,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 ### Security
+
+## 0.1.1
+
+Released on February 16th, 2023.
+
+### Added
+- `get_client` method and `url` field in `BitbucketCredentials` - [#7](https://github.com/PrefectHQ/prefect-bitbucket/pull/7/)
+- support to log into Bitbucket Server with `token` and `username` - [#11](https://github.com/PrefectHQ/prefect-bitbucket/pull/11/)
 
 ## 0.1.0
 
