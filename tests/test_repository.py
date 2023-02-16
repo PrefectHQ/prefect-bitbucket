@@ -144,7 +144,9 @@ class TestBitBucketRepository:
         ]
         assert mock.await_args[0][0][: len(expected_cmd)] == expected_cmd
 
-    async def test_token_with_username_added_correctly_from_credential(self, monkeypatch):
+    async def test_token_with_username_added_correctly_from_credential(
+        self, monkeypatch
+    ):
         """Ensure that the repo url is in the format `https://username:token@url`."""  # noqa: E501
 
         class p:
@@ -157,7 +159,9 @@ class TestBitBucketRepository:
         repo = "https://bitbucket.org/PrefectHQ/prefect.git"
         b = BitBucketRepository(
             repository=repo,
-            bitbucket_credentials=BitBucketCredentials(token=SecretStr(credential), username=username),
+            bitbucket_credentials=BitBucketCredentials(
+                token=SecretStr(credential), username=username
+            ),
         )
         await b.get_directory()
         assert mock.await_count == 1
@@ -168,8 +172,8 @@ class TestBitBucketRepository:
             "--depth",
             "1",
         ]
-        assert mock.await_args[0][0][: len(expected_cmd)] == expected_cmd        
-        
+        assert mock.await_args[0][0][: len(expected_cmd)] == expected_cmd
+
     async def test_ssh_fails_with_credential(self, monkeypatch):
         """Ensure that credentials cannot be passed in if the URL is not in the HTTPS
         format.
