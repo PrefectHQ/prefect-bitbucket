@@ -154,7 +154,7 @@ private_bitbucket_block.save(name="my-private-bitbucket-block")
 
 !!! info "Differences between Bitbucket Server and Bitbucket Cloud"
 
-For Bitbucket Cloud, only set the `token` to authenticate. For Bitbucket Server, set both the `token` and the `username`.
+    For Bitbucket Cloud, only set the `token` to authenticate. For Bitbucket Server, set both the `token` and the `username`.
 
 ## Resources
 
