@@ -152,10 +152,9 @@ private_bitbucket_block = BitBucketRepository(
 private_bitbucket_block.save(name="my-private-bitbucket-block")
 ```
 
-## Differences between Bitbucket Server and Bitbucket Cloud
+!!! info "Differences between Bitbucket Server and Bitbucket Cloud"
 
-- For Bitbucket Cloud, only set the token.
-- For Bitbucket Server, set token and username. 
+For Bitbucket Cloud, only set the `token` to authenticate. For Bitbucket Server, set both the `token` and the `username`.
 
 ## Resources
 
