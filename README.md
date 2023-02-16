@@ -152,6 +152,10 @@ private_bitbucket_block = BitBucketRepository(
 private_bitbucket_block.save(name="my-private-bitbucket-block")
 ```
 
+!!! info "Differences between Bitbucket Server and Bitbucket Cloud"
+
+    For Bitbucket Cloud, only set the `token` to authenticate. For Bitbucket Server, set both the `token` and the `username`.
+
 ## Resources
 
 If you encounter any bugs while using `prefect-bitbucket`, feel free to open an issue in the [prefect-bitbucket](https://github.com/PrefectHQ/prefect-bitbucket) repository.

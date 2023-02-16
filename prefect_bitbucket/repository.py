@@ -104,15 +104,21 @@ class BitBucketRepository(ReadableDeploymentStorage):
     def _create_repo_url(self) -> str:
         """Format the URL provided to the `git clone` command.
 
-        For private repos:
+        For private repos in the cloud:
         https://x-token-auth:<access-token>@bitbucket.org/<user>/<repo>.git
+        For private repos with a local bitbucket server:
+        https://<username>:<access-token>@<server>/scm/<project>/<repo>.git
+
         All other repos should be the same as `self.repository`.
         """
         url_components = urlparse(self.repository)
         if url_components.scheme == "https" and self.bitbucket_credentials is not None:
             token = self.bitbucket_credentials.token.get_secret_value()
+            username = self.bitbucket_credentials.username
+            if username is None:
+                username = "x-token-auth"
             updated_components = url_components._replace(
-                netloc=f"x-token-auth:{token}@{url_components.netloc}"
+                netloc=f"{username}:{token}@{url_components.netloc}"
             )
             full_url = urlunparse(updated_components)
         else:
