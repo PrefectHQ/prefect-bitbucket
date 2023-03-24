@@ -112,7 +112,12 @@ class BitBucketRepository(ReadableDeploymentStorage):
         All other repos should be the same as `self.repository`.
         """
         url_components = urlparse(self.repository)
-        if url_components.scheme == "https" and self.bitbucket_credentials is not None:
+        token_is_set = (
+            self.bitbucket_credentials is not None and self.bitbucket_credentials.token
+        )
+
+        # Need a token for private repos
+        if url_components.scheme == "https" and token_is_set:
             token = self.bitbucket_credentials.token.get_secret_value()
             username = self.bitbucket_credentials.username
             if username is None:
@@ -152,7 +157,7 @@ class BitBucketRepository(ReadableDeploymentStorage):
     async def get_directory(
         self, from_path: Optional[str] = None, local_path: Optional[str] = None
     ) -> None:
-        """Clones a BitBucket project specified in `from_path` to the provided `local_path`.
+        """Clones a BitBucket project within `from_path` to the provided `local_path`.
 
         This defaults to cloning the repository reference configured on the
         Block to the present working directory.
