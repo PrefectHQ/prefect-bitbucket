@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 ### Fixed
+- Treatment of `BitBucketCredentials` token when using `BitBucketRepository` to access private repos - [#16](https://github.com/PrefectHQ/prefect-bitbucket/pull/16/)
 
 ### Security
 
