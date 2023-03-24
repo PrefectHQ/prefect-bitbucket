@@ -45,7 +45,9 @@ class BitBucketCredentials(CredentialsBlock):
     token: Optional[SecretStr] = Field(
         name="Personal Access Token",
         default=None,
-        description="A BitBucket Personal Access Token - required for private repositories.",
+        description=(
+            "A BitBucket Personal Access Token - required for private repositories."
+        ),
     )
     username: Optional[str] = Field(
         default=None,

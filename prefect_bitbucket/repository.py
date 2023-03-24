@@ -157,7 +157,7 @@ class BitBucketRepository(ReadableDeploymentStorage):
     async def get_directory(
         self, from_path: Optional[str] = None, local_path: Optional[str] = None
     ) -> None:
-        """Clones a BitBucket project specified in `from_path` to the provided `local_path`.
+        """Clones a BitBucket project within `from_path` to theprovided `local_path`.
 
         This defaults to cloning the repository reference configured on the
         Block to the present working directory.
