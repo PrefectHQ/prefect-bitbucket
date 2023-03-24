@@ -112,7 +112,11 @@ class BitBucketRepository(ReadableDeploymentStorage):
         All other repos should be the same as `self.repository`.
         """
         url_components = urlparse(self.repository)
-        token_is_set = self.bitbucket_credentials is not None and self.bitbucket_credentials.token
+        token_is_set = (
+            self.bitbucket_credentials is not None and self.bitbucket_credentials.token
+        )
+
+        # Need a token for private repos
         if url_components.scheme == "https" and token_is_set:
             token = self.bitbucket_credentials.token.get_secret_value()
             username = self.bitbucket_credentials.username
