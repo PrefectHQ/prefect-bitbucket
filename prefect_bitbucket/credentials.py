@@ -23,7 +23,8 @@ class BitBucketCredentials(CredentialsBlock):
     """Store BitBucket credentials to interact with private BitBucket repositories.
 
     Attributes:
-        token: An access token to authenticate with BitBucket.
+        token: An access token to authenticate with BitBucket. This is required
+            for accessing private repositories.
         username: Identification name unique across entire BitBucket site.
         password: The password to authenticate to BitBucket.
         url: The base URL of your BitBucket instance.
@@ -44,7 +45,7 @@ class BitBucketCredentials(CredentialsBlock):
     token: Optional[SecretStr] = Field(
         name="Personal Access Token",
         default=None,
-        description="A BitBucket Personal Access Token.",
+        description="A BitBucket Personal Access Token - required for private repositories.",
     )
     username: Optional[str] = Field(
         default=None,
