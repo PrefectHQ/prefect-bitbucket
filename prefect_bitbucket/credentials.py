@@ -81,10 +81,7 @@ class BitBucketCredentials(CredentialsBlock):
     def _validate_token(cls, value: Optional[SecretStr]) -> Optional[SecretStr]:
         """Warns if the token is not prefixed with 'x-token-auth:'."""
         if value:
-            secret_value = (
-                value.get_secret_value() if isinstance(value, SecretStr) else value
-            )
-            if not secret_value.startswith("x-token-auth:"):
+            if not value.get_secret_value().startswith("x-token-auth:"):
                 warnings.warn(
                     "For use in git operations such as Prefect deployment steps,"
                     " the BitBucketCredentials token must be prefixed with"

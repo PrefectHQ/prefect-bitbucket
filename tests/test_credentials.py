@@ -1,11 +1,12 @@
 import pytest
 from atlassian.bitbucket import Bitbucket, Cloud
 from prefect.blocks.core import Block
+from pydantic import SecretStr
 
 from prefect_bitbucket.credentials import BitBucketCredentials, ClientType
 
 
-@pytest.mark.parametrize("token", [None, "token_value"])
+@pytest.mark.parametrize("token", [None, SecretStr("token_value")])
 def test_bitbucket_credentials(token):
     """Test credentials is Block type."""
     credentials_block = BitBucketCredentials(token=token)
