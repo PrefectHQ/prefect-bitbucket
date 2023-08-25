@@ -86,8 +86,10 @@ class BitBucketCredentials(CredentialsBlock):
             )
             if not secret_value.startswith("x-token-auth:"):
                 warnings.warn(
-                    "For use in git operations such as Prefect deployment steps, the token must be prefixed with 'x-token-auth:'."
-                    " You can do this by setting the token to 'x-token-auth:<my-token>'.",
+                    "For use in git operations such as Prefect deployment steps,"
+                    " the BitBucketCredentials token must be prefixed with"
+                    " 'x-token-auth:'. You can do this by setting the token to"
+                    " 'x-token-auth:<my-token>'.",
                     UserWarning,
                 )
         return value
