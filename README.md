@@ -39,12 +39,6 @@ Install `prefect-bitbucket` with `pip`:
 pip install prefect-bitbucket
 ```
 
-Then, register to [view the block](https://orion-docs.prefect.io/ui/blocks/) on Prefect Cloud:
-
-```bash
-prefect block register -m prefect_bitbucket
-```
-
 Note, to use the `load` method on Blocks, you must already have a block document [saved through code](https://orion-docs.prefect.io/concepts/blocks/#saving-blocks) or [saved through the UI](https://orion-docs.prefect.io/ui/blocks/).
 
 ### Write and run a flow
@@ -74,7 +68,7 @@ def create_new_bitbucket_creds_flow():
     bitbucket_credentials_block = BitBucketCredentials(
         token="my-token",
         username="my-username"
-    )
+    ).save("my-bitbucket-credentials-block")
 
 create_new_bitbucket_creds_flow()
 ```
