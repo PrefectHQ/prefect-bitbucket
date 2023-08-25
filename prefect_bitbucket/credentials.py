@@ -2,6 +2,7 @@
 import re
 from enum import Enum
 from typing import Optional, Union
+import warnings
 
 from prefect.blocks.abstract import CredentialsBlock
 from pydantic import Field, SecretStr, validator
@@ -73,6 +74,19 @@ class BitBucketCredentials(CredentialsBlock):
             )
         if not len(value) <= 30:
             raise ValueError("Username cannot be longer than 30 chars.")
+        return value
+    
+    @validator("token", pre=True, always=True)
+    def _validate_token(cls, value: Optional[SecretStr]) -> Optional[SecretStr]:
+        """Warns if the token is not prefixed with 'x-token-auth:'."""
+        if value:
+            secret_value = value.get_secret_value() if isinstance(value, SecretStr) else value
+            if not secret_value.startswith("x-token-auth:"):
+                warnings.warn(
+                    "For git operations such as Prefect deployment steps, the token must be prefixed with 'x-token-auth:'."
+                    " You can do this by setting the token to 'x-token-auth:<my-token>'.",
+                    UserWarning,
+                )
         return value
 
     def get_client(
