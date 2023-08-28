@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Added
-- Adds a `UserWarning` to notify user of possibly invalid token field in `BitBucketCredentials` - [#22](https://github.com/PrefectHQ/prefect-bitbucket/pull/22/)
+- Adds a `ValueError` to notify user of invalid token field in `BitBucketCredentials` - [#22](https://github.com/PrefectHQ/prefect-bitbucket/pull/22/)
 
 - Adds placeholder text to the `BitBucketCredentials` block description for the Prefect UI - [#22](https://github.com/PrefectHQ/prefect-bitbucket/pull/22/)
 - Adds `filterwarnings` section to the `setup.cfg` - [#22](https://github.com/PrefectHQ/prefect-bitbucket/pull/22/)
