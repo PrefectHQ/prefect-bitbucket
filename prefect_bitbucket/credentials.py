@@ -1,6 +1,5 @@
 """Module to enable authenticate interactions with BitBucket."""
 import re
-import warnings
 from enum import Enum
 from typing import Optional, Union
 
@@ -81,19 +80,17 @@ class BitBucketCredentials(CredentialsBlock):
     def _validate_token(
         cls, value: Optional[Union[str, SecretStr]]
     ) -> Optional[Union[str, SecretStr]]:
-        """Warns if the token is not prefixed with 'x-token-auth:'."""
+        """Raise if the token is not prefixed with 'x-token-auth:'."""
         if value:
             secret_value = (
                 value.get_secret_value() if isinstance(value, SecretStr) else value
             )
             if not secret_value.startswith("x-token-auth:"):
-                warnings.warn(
-                    "For use in git operations such as Prefect deployment steps,"
-                    " the BitBucketCredentials token must be prefixed with"
-                    " 'x-token-auth:'. You can do this by setting the token to"
-                    " 'x-token-auth:<my-token>'.",
-                    UserWarning,
+                raise ValueError(
+                    "For use in git operations, token must be prefixed with"
+                    " 'x-token-auth:'."
                 )
+
         return value
 
     def get_client(

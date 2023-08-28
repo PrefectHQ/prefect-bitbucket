@@ -5,8 +5,14 @@ from prefect.blocks.core import Block
 from prefect_bitbucket.credentials import BitBucketCredentials, ClientType
 
 
-@pytest.mark.parametrize("token", [None, "token_value"])
-def test_bitbucket_credentials(token):
+def test_invalid_bitbucket_credentials_raises():
+    """Test token validator raises."""
+    with pytest.raises(ValueError):
+        BitBucketCredentials(token="invalid_token")
+
+
+@pytest.mark.parametrize("token", [None, "x-token-auth:token_value"])
+def test_valid_bitbucket_credentials(token):
     """Test credentials is Block type."""
     credentials_block = BitBucketCredentials(token=token)
     assert isinstance(credentials_block, Block)
