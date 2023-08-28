@@ -7,7 +7,10 @@ from prefect_bitbucket.credentials import BitBucketCredentials, ClientType
 
 def test_invalid_bitbucket_credentials_raises():
     """Test token validator raises."""
-    with pytest.raises(ValueError):
+    with pytest.raises(
+        ValueError,
+        match="For use in git operations, BitBucketCredentials token must be prefixed",
+    ):
         BitBucketCredentials(token="invalid_token")
 
 
@@ -30,16 +33,16 @@ def test_bitbucket_username_invalid_char():
     """Ensure invalid char username raises."""
     with pytest.raises(
         ValueError,
-        match="For use in git operations, BitBucketCredentials token must be prefixed",
+        match="Username must be alpha, num, dash and/or underscore only",
     ):
-        BitBucketCredentials(token="token", username="invalid!username")
+        BitBucketCredentials(token="x-token-auth:token", username="invalid!username")
 
 
 def test_bitbucket_username_over_max_length():
     """Ensure username of greater than max allowed length raises."""
     with pytest.raises(ValueError):
         BitBucketCredentials(
-            token="token", username="usernamethatisoverthirtycharacters"
+            token="x-token-auth:token", username="usernamethatisoverthirtycharacters"
         )
 
 

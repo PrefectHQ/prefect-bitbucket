@@ -88,7 +88,7 @@ class BitBucketCredentials(CredentialsBlock):
             if not secret_value.startswith("x-token-auth:"):
                 raise ValueError(
                     "For use in git operations, BitBucketCredentials token must be"
-                    "prefixed with 'x-token-auth:'."
+                    " prefixed with 'x-token-auth:'."
                 )
 
         return value
