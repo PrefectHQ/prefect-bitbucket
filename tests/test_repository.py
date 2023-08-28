@@ -127,7 +127,7 @@ class TestBitBucketRepository:
 
         mock = AsyncMock(return_value=p())
         monkeypatch.setattr(prefect_bitbucket.repository, "run_process", mock)
-        credential = "XYZ"
+        credential = "x-token-auth:XYZ"
         repo = "https://bitbucket.org/PrefectHQ/prefect.git"
         b = BitBucketRepository(
             repository=repo,
@@ -154,7 +154,7 @@ class TestBitBucketRepository:
 
         mock = AsyncMock(return_value=p())
         monkeypatch.setattr(prefect_bitbucket.repository, "run_process", mock)
-        credential = "XYZ"
+        credential = "x-token-auth:XYZ"
         username = "ABC"
         repo = "https://bitbucket.org/PrefectHQ/prefect.git"
         b = BitBucketRepository(
@@ -184,7 +184,7 @@ class TestBitBucketRepository:
 
         mock = AsyncMock(return_value=p())
         monkeypatch.setattr(prefect_bitbucket.repository, "run_process", mock)
-        credential = "XYZ"
+        credential = "x-token-auth:XYZ"
         error_msg = (
             "Credentials can only be used with BitBucket repositories "
             "using the 'HTTPS' format. You must either remove the "
