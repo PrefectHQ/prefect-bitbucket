@@ -28,7 +28,10 @@ def ensure_valid_bitbucket_username_passes():
 
 def test_bitbucket_username_invalid_char():
     """Ensure invalid char username raises."""
-    with pytest.raises(ValueError):
+    with pytest.raises(
+        ValueError,
+        match="For use in git operations, BitBucketCredentials token must be prefixed",
+    ):
         BitBucketCredentials(token="token", username="invalid!username")
 
 
