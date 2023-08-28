@@ -40,7 +40,10 @@ def test_bitbucket_username_invalid_char():
 
 def test_bitbucket_username_over_max_length():
     """Ensure username of greater than max allowed length raises."""
-    with pytest.raises(ValueError):
+    with pytest.raises(
+        ValueError,
+        match="Username cannot be longer than 30 chars",
+    ):
         BitBucketCredentials(
             token="x-token-auth:token", username="usernamethatisoverthirtycharacters"
         )
