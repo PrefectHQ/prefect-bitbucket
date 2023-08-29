@@ -115,19 +115,22 @@ class BitBucketRepository(ReadableDeploymentStorage):
         token_is_set = (
             self.bitbucket_credentials is not None and self.bitbucket_credentials.token
         )
+        full_url = self.repository
 
         # Need a token for private repos
         if url_components.scheme == "https" and token_is_set:
             token = self.bitbucket_credentials.token.get_secret_value()
             username = self.bitbucket_credentials.username
-            if username is None:
-                username = "x-token-auth"
-            updated_components = url_components._replace(
-                netloc=f"{username}:{token}@{url_components.netloc}"
-            )
+
+            if not token.startswith("x-token-auth:") and username is not None:
+                updated_components = url_components._replace(
+                    netloc=f"{username}:{token}@{url_components.netloc}"
+                )
+            else:
+                updated_components = url_components._replace(
+                    netloc=f"{token}@{url_components.netloc}"
+                )
             full_url = urlunparse(updated_components)
-        else:
-            full_url = self.repository
 
         return full_url
 
