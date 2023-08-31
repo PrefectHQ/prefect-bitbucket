@@ -48,6 +48,7 @@ class BitBucketCredentials(CredentialsBlock):
         description=(
             "A BitBucket Personal Access Token - required for private repositories."
         ),
+        example="x-token-auth:my-token",
     )
     username: Optional[str] = Field(
         default=None,
