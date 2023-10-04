@@ -4,7 +4,12 @@ from enum import Enum
 from typing import Optional, Union
 
 from prefect.blocks.abstract import CredentialsBlock
-from pydantic import Field, SecretStr, validator
+from pydantic import VERSION as PYDANTIC_VERSION
+
+if PYDANTIC_VERSION.startswith("2."):
+    from pydantic.v1 import Field, SecretStr, validator
+else:
+    from pydantic import Field, SecretStr, validator
 
 try:
     from atlassian.bitbucket import Bitbucket, Cloud
