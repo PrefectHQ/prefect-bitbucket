@@ -1,2 +1,2 @@
-prefect >=2.13.5
+prefect>=2.13.5
 atlassian-python-api>=3.32.1
