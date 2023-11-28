@@ -46,7 +46,7 @@ class BitBucketCredentials(CredentialsBlock):
     """
 
     _block_type_name = "BitBucket Credentials"
-    _logo_url = "https://images.ctfassets.net/gm98wzqotmnx/27LMR24ewTSDW238Lks1vH/34c5028659f4007528feadc8db8cecbd/500px-Bitbucket-blue-logomark-only.svg.png?h=250"  # noqa
+    _logo_url = "https://cdn.sanity.io/images/3ugk85nk/production/5d729f7355fb6828c4b605268ded9cfafab3ae4f-250x250.png"  # noqa
     token: Optional[SecretStr] = Field(
         name="Personal Access Token",
         default=None,
